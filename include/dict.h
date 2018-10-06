@@ -53,22 +53,18 @@ int dictInsert(dict * d , char * key ,void* elm);
 
 /* 
 * Remove o elemento identificado pela chave key
-* retorna o elm armazenado no dicionário caso a operação tenha sido bem sucedida
+* retorna o elm identificado pela key caso a operação tenha sido bem sucedida
 * retorna NULL caso não seja encontrada nenhuma correspondência para a chave *key*
 */
 void * dictRemove(dict *d, char * key);
 
-/*
-* Aplica a função "dealoc" (passada como arg) em todos os elementos do dicionário
-* ao final desaloca o dicionário
-*/
-void dictDestroy(dict * d );
 
-/*
-* Aplica a função print para todos os elementos do dicionário
+/* 
+* Busca por um elemento identificado pela chave *key* passada
+* retorna o elm identificado pela key caso a operação tenha sido bem sucedida
+* retorna NULL caso não seja encontrada nenhuma correspondência para a chave *key*
 */
-void dictPrint(dict *d , void(*print)(void*));
-
+void * dictQuery(dict * d, char * key);
 
 /*
 * Redimensiona o vetor do dicionário, alocando um novo vetor e copiando os elementos do velho para o novo.
@@ -77,5 +73,16 @@ void dictPrint(dict *d , void(*print)(void*));
 * retorna TRUE caso a operação tenha sido bem sucedida
 */
 int dictResize();
+
+/*
+* Aplica a função print para todos os elementos do dicionário
+*/
+void dictPrint(dict *d , void(*print)(void*));
+
+/*
+* Aplica a função "dealoc" (passada como arg) em todos os elementos do dicionário
+* ao final desaloca o dicionário
+*/
+void dictDestroy(dict * d );
 
 #endif

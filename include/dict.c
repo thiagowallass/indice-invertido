@@ -79,6 +79,7 @@ void dictPrint(dict *d , void(*print)(void*)){
         }
     }
 }
+
 int hash(char * key){
     int i , x , n;
     /* Itera sobre cada letra de key, retirando seu valor ascii e somando com a sua multiplicação por um peso aleatorio */
@@ -90,9 +91,35 @@ int hash(char * key){
     return x;
 }
 
+void * dictQuery(dict * d, char * key){
+    int i, empty , equals , hash_key;
+
+    /*
+    * Certifica-se de que nenhum ponteiro é nulo
+    */
+    if(d==NULL || key ==NULL) return NULL;
+    if(strcmp(key , "")==0 ||strcmp(key , "_")==0 ) return NULL;
+    
+    hash_key = hash(key)%d->size; //Calcula o índice
+
+    /* Busca a primeira casa vazia, ou que a chave seja igual a key, por tentativa linear*/
+    empty = strcmp(d->elms[hash_key]->key  , "") == 0;
+    equals = strcmp(d->elms[hash_key]->key , key) == 0;
+    while(empty!=TRUE && equals!=TRUE && hash_key<d->size-1){
+        /* incrementa e compara novamente */
+        hash_key++;
+        empty = strcmp(d->elms[hash_key]->key  , "") == 0;
+        equals = strcmp(d->elms[hash_key]->key , key) == 0;
+    }
+    /* Caso tenha encontrado a chave */
+    if(equals==TRUE){
+        return d->elms[hash_key]->data;
+    }
+    return NULL;
+}
+
 void * dictRemove(dict *d, char * key){
-    int hash_key;
-    int i, empty , equals;
+    int i, empty , equals , hash_key;
 
     /*
     * Certifica-se de que nenhum ponteiro é nulo

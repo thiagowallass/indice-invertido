@@ -9,7 +9,7 @@
 #ifndef NULL
 #define NULL (void*)0
 #endif
-#define INITVAL 2
+#define INITVAL 50
 #define KEYVAL 80
 
 /*

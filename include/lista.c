@@ -16,7 +16,7 @@ void sllPrint(sll * l, void (*print)(void*)){
     }
 }
 
-int insertBefore(sll * l, void * data, void * key, int (*cmp)(void*,void*)){
+int sllInsertBefore(sll * l, void * data, void * key, int (*cmp)(void*,void*)){
     node * aux, * prev , * new;
     int stat;
 
@@ -33,6 +33,13 @@ int insertBefore(sll * l, void * data, void * key, int (*cmp)(void*,void*)){
                 aux = aux->next;
                 stat = cmp(key,aux->data);
             }
+            /* Aloca novo nó */
+            new = (node*)malloc(sizeof(node));
+
+            /* Checa se realmente alocou e preenche os dados */
+            if(new!=NULL){
+                    new->data = data;
+            }
 
             /* Caso haja uma correspondência */
             if(stat == TRUE){
@@ -40,28 +47,24 @@ int insertBefore(sll * l, void * data, void * key, int (*cmp)(void*,void*)){
                 * Trata quando um elemento está no começo da lista,
                 * ou em outra posição 
                 */
-
-                /* Aloca novo nó */
-                new = (node*)malloc(sizeof(node));
-
-                /* Checa se realmente alocou */
-                if(new!=NULL){
-                    new->data = data;
-                    new->next = aux;
-                    if(prev!=NULL){
-                        prev->next = new;
-                    }else{
-                        l->first = new;
-                    }
-                    return TRUE;
+                new->next = aux;
+                if(prev!=NULL){
+                    prev->next = new;
+                }else{
+                    l->first = new;
                 }
+                return TRUE;
+            }else{
+                aux->next = new;
+                new->next = NULL;
+                return TRUE;
             }
         }
     }
     return FALSE;
 }
 
-int insertAfter(sll * l, void * data, void * key, int (*cmp)(void*,void*)){
+int sllInsertAfter(sll * l, void * data, void * key, int (*cmp)(void*,void*)){
     node * aux, * new;
     int stat;
     

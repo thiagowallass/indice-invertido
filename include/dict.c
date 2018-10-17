@@ -86,6 +86,7 @@ int hash(char * key){
     n = strlen(key);
     x = 0;
     for(i = 0 ; i < n ; i++){
+        printf("Key = %d\n", (int)key[i]);
         x+=((int) key[i]) * (128^(n-i));
     }
     return x;
@@ -101,7 +102,7 @@ void * dictQuery(dict * d, char * key){
     if(strcmp(key , "")==0 ||strcmp(key , "_")==0 ) return NULL;
     
     hash_key = hash(key)%d->size; //Calcula o índice
-
+    printf("%d\n", hash_key);
     /* Busca a primeira casa vazia, ou que a chave seja igual a key, por tentativa linear*/
     empty = strcmp(d->elms[hash_key]->key  , "") == 0;
     equals = strcmp(d->elms[hash_key]->key , key) == 0;

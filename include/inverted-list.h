@@ -25,14 +25,17 @@ typedef struct inverted_list{
 /*
 * Aloca um novo elemento do tipo inv_list
 */
-inv_list * ilCreate(void);
+inv_list * ilCreate(char * PATH);
 
 /* 
 * Insere uma nova dupla <n , doc_id> , atrelada à uma palavra 
 */
-int ilInsert(inv_list * invl, char * key , void * v);
+int ilInsert(inv_list * invl, char * key, int file);
 
 /* Printa todos os elementos de invl */
 void ilPrint(inv_list * invl);
+
+/* Desaloca toda a estrutura invl */
+void ilDestroy(inv_list * invl);
 
 #endif

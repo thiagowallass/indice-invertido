@@ -67,7 +67,7 @@ void * sllRemoveFirst(sll*l);
 * insere o elemento passado logo após o nó identificado pela chave
 * caso não tenha sido encontrado ou tenha havido erro, retorna NULL
 */
-int insertAfter(sll * l, void * data, void * key, int (*cmp)(void*,void*));
+int sllInsertAfter(sll * l, void * data, void * key, int (*cmp)(void*,void*));
 
 /* 
 * Realiza uma pesquisa por chave
@@ -75,7 +75,7 @@ int insertAfter(sll * l, void * data, void * key, int (*cmp)(void*,void*));
 * insere o elemento passado logo antes do nó identificado pela chave
 * caso não tenha sido encontrado ou tenha havido erro, retorna NULL
 */
-int insertBefore(sll * l, void * data, void * key, int (*cmp)(void*,void*));
+int sllInsertBefore(sll * l, void * data, void * key, int (*cmp)(void*,void*));
 
 /* 
 * Aplica a função print em todos os nós da lista

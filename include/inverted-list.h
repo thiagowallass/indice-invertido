@@ -28,7 +28,10 @@ typedef struct inverted_list{
 inv_list * ilCreate(char * PATH);
 
 /* 
-* Insere uma nova dupla <n , doc_id> , atrelada à uma palavra 
+* Incrementa uma dupla <n , doc_id> , atrelada à uma palavra
+* Caso esta dupla não exista ainda, será criada uma nova dupla com n = 1
+* Caso a palavra não esteja no dicionário ainda, será criada uma nova entrada no dicionário, com a chave key passada 
+* e será criada a sua lista de duplas, com a dupla <1 , file> já inserida
 */
 int ilInsert(inv_list * invl, char * key, int file);
 

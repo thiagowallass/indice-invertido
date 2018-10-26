@@ -46,6 +46,16 @@ void * sllRemove(sll * l, void * key, int(*cmp)(void*,void*));
 void * sllQuery(sll * l, void * key, int(*cmp)(void *,void*));
 
 /* 
+* Aplica a função print em todos os nós da lista
+*/
+void sllPrint(sll * l, void (*print)(void*));
+
+/* 
+* Desaloca todos os nós da lista
+*/
+void sllDestroy(sll*);
+
+/* 
 * Retorna o numero de nós em uma lista 
 * em caso de erro, retorna -1
 */
@@ -76,15 +86,5 @@ int sllInsertAfter(sll * l, void * data, void * key, int (*cmp)(void*,void*));
 * caso não tenha sido encontrado ou tenha havido erro, retorna NULL
 */
 int sllInsertBefore(sll * l, void * data, void * key, int (*cmp)(void*,void*));
-
-/* 
-* Aplica a função print em todos os nós da lista
-*/
-void sllPrint(sll * l, void (*print)(void*));
-
-/* 
-* Desaloca todos os nós da lista
-*/
-void sllDestroy(sll*);
 
 #endif

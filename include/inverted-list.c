@@ -54,12 +54,10 @@ int ilInsert(inv_list * invl, char * key, int file){
     int * vet;
 
     if(invl==NULL || key == NULL) return FALSE;
-    printf("Inserting %s\n", key);
     /* Armazena a lista de duplas da palavra passada, buscando-a no dicionário do índice invertido */
     l_p = dictQuery(invl->elms , key);
     
     if(l_p == NULL){//Caso a palavra ainda não tenha sido registrada
-        printf(" first time\n");
         /* Cria a lista de duplas */
         l = sllCreate();
 
@@ -74,7 +72,6 @@ int ilInsert(inv_list * invl, char * key, int file){
         return dictInsert(invl->elms , key  , (void*)l);
 
     }else{//Caso a palavra já tenha sido registrada
-        printf(" not 1st time\n");
         /* converte a lista */
         l = (sll*)l_p;
 
@@ -101,8 +98,13 @@ int isletter(char c){
         case '\n':
         case '#':
         case '=':
+        case '(':
+        case ')':
         case '}':
         case '{':
+        case '\'':
+        case '\"':
+        case '-':
         case ' ':
         case '.':
         case ',':
@@ -164,8 +166,6 @@ sll * get_files(char * PATH){
 
         /* fecha o diretório */
         closedir(dir_pointer);
-        sllPrint(l , print_filename);
-        printf("\n");
         return l;
     }
 
@@ -190,7 +190,6 @@ void read_file(inv_list * invl, char* PATH, char* fname, int fnumber){
                 /*Itera por todas as letras de uma palavra até o fim da palavra*/
                 tmp = fgetc(f);
                 while(isletter(tmp) == TRUE && !feof(f)){
-                    printf("%c is letter\n",tmp);
                     buffer[i] = tmp;
                     tmp = fgetc(f);
                     i++;
@@ -200,7 +199,6 @@ void read_file(inv_list * invl, char* PATH, char* fname, int fnumber){
                 if(i!=0){//Se alguma letra já foi inserida como parte da palavra
                     /* Define o fim da palavra */
                     buffer[i] = '\0';
-                    printf("%s\n", buffer);
                     ilInsert(invl , buffer , fnumber);
                 }
                 i = 0;
